@@ -15,4 +15,8 @@ LazyData: true
 Imports: 
   devtools,
   rmarkdown,
-  knitr
+  knitr,
+  xml2,
+  rvest,
+  magrittr
+RoxygenNote: 6.0.1
