@@ -48,7 +48,7 @@ get_pages <- function(city) {
 
 #' Get prices for a given city and page
 #'
-#' \code{get_pages()} scraps prices elements for a given Swiss city and page
+#' \code{get_prices()} scraps prices elements for a given Swiss city and page
 #' from \url{https://www.comparis.ch} web-page and returns a numeric vector of
 #' prices.
 #'
@@ -58,7 +58,7 @@ get_pages <- function(city) {
 #' @return a numeric vector of prices.
 #'
 #' @examples
-#' prices <- get_pages("bern", 3)
+#' prices <- get_prices("bern", 3)
 #'
 #' @author Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 #'
@@ -91,4 +91,31 @@ get_prices <- function(city, page) {
     substring(first = 5) %>%
     gsub(pattern = ",", replacement = "") %>%
     as.numeric()
+}
+
+#' Get a market volume for a given city
+#'
+#' \code{get_volume()} scraps a market volume for a given city, which is defined
+#' as a sum of prices of all listings published in the latest week on
+#' \url{https://www.comparis.ch}.
+#'
+#' @param city a length one character vector indicating a city.
+#'
+#' @return a sum of prices of all listings.
+#'
+#' @examples
+#' pages <- get_volume("bern")
+#'
+#' @author Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
+#'
+#' @export
+get_volume <- function(city) {
+
+  sapply(
+    X = get_pages(city),
+    FUN = get_prices,
+    city = city
+  ) %>%
+    unlist() %>%
+    sum(na.rm = TRUE)
 }

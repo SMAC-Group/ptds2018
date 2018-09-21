@@ -15,14 +15,14 @@ get_prices(city, page)
 a numeric vector of prices.
 }
 \description{
-\code{get_pages()} scraps prices elements for a given Swiss city and page
+\code{get_prices()} scraps prices elements for a given Swiss city and page
 from \url{https://www.comparis.ch} web-page and returns a numeric vector of
 prices.
 }
 \examples{
-prices <- get_pages("bern", 3)
+prices <- get_prices("bern", 3)
 
 }
 \author{
-Iegor Rudnytskyi \email{iegor.rudnytskyi@unil.ch}
+Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 }

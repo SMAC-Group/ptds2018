@@ -22,5 +22,5 @@ pages <- get_pages("bern")
 
 }
 \author{
-Iegor Rudnytskyi \email{iegor.rudnytskyi@unil.ch}
+Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 }
