@@ -4,15 +4,15 @@
 \alias{get_prices}
 \title{Get prices for a given city and page}
 \usage{
-get_prices(city, page, validate_page = TRUE)
+get_prices(city, page, validate = TRUE)
 }
 \arguments{
 \item{city}{a length one character vector indicating a city.}
 
 \item{page}{a length one numeric vector indicating a page number.}
 
-\item{validate_page}{a length one logical vector indicating whether or not to
-validate \code{page} argument. Default value: \code{TRUE}.}
+\item{validate}{a length one logical vector indicating whether or not to
+validate \code{city} and \code{page} arguments. Default value: \code{TRUE}.}
 }
 \value{
 a numeric vector of prices.

@@ -20,6 +20,16 @@
 #' @export
 get_pages <- function(city) {
 
+  # validate city
+  stopifnot(
+    exprs = {
+      is.character(city)
+      length(city) == 1
+      all(!is.na(city))
+    }
+  )
+
+  # define url
   url_path <- paste0(
     "https://en.comparis.ch/immobilien/result/list?requestobject=%7B%22DealTyp",
     "e%22%3A%2210%22%2C%22SiteId%22%3A%220%22%2C%22RootPropertyTypes%22%3A%5B%",
@@ -41,6 +51,7 @@ get_pages <- function(city) {
     "ghtLongitude%22%3Anull%7D&sort=11&searchtype=8"
   )
 
+  # load content of url and extract pages
   xml2::read_html(url_path) %>%
     rvest::html_nodes("#resultlist_paging a") %>%
     rvest::html_text() %>%
@@ -48,6 +59,7 @@ get_pages <- function(city) {
     max(na.rm = TRUE) %>%
     magrittr::subtract(e2 = 1) %>%
     seq(from = 0)
+
 }
 
 #' Get prices for a given city and page
@@ -62,8 +74,8 @@ get_pages <- function(city) {
 #'
 #' @param city a length one character vector indicating a city.
 #' @param page a length one numeric vector indicating a page number.
-#' @param validate_page a length one logical vector indicating whether or not to
-#' validate \code{page} argument. Default value: \code{TRUE}.
+#' @param validate a length one logical vector indicating whether or not to
+#' validate \code{city} and \code{page} arguments. Default value: \code{TRUE}.
 #'
 #' @return a numeric vector of prices.
 #'
@@ -73,11 +85,35 @@ get_pages <- function(city) {
 #' @author Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 #'
 #' @export
-get_prices <- function(city, page, validate_page = TRUE) {
+get_prices <- function(city, page, validate = TRUE) {
 
-  if (validate_page)
-    stopifnot(page %in% get_pages(city))
+  # validate validate
+  stopifnot(
+    exprs = {
+      is.logical(validate)
+      length(validate) == 1
+      all(!is.na(validate))
+    }
+  )
 
+  # validate city and page if needed
+  if (validate) {
+    stopifnot(
+      exprs = {
+        # validate city
+        is.character(city)
+        length(city) == 1
+        all(!is.na(city))
+        # validate page
+        is.numeric(page)
+        length(page) == 1
+        all(!is.na(page))
+        page %in% get_pages(city)
+      }
+    )
+  }
+
+  # define url
   url_path <- paste0(
     "https://en.comparis.ch/immobilien/result/list?requestobject={%22DealType%",
     "22:%2210%22,%22SiteId%22:%220%22,%22RootPropertyTypes%22:[],%22PropertyTy",
@@ -98,12 +134,14 @@ get_prices <- function(city, page, validate_page = TRUE) {
     page
   )
 
+  # load content of url and extract prices
   xml2::read_html(url_path) %>%
     rvest::html_nodes(".item-price strong") %>%
     rvest::html_text() %>%
     substring(first = 5) %>%
     gsub(pattern = ",", replacement = "") %>%
     {suppressWarnings(as.numeric(.))}
+
 }
 
 #' Get a market volume for a given city
@@ -128,13 +166,25 @@ get_prices <- function(city, page, validate_page = TRUE) {
 #' @export
 get_volume <- function(city, delay = 1) {
 
+  # validate delay
+  stopifnot(
+    exprs = {
+      is.numeric(delay)
+      length(delay) == 1
+      all(!is.na(delay))
+      delay >= 0
+    }
+  )
+
+  # get prices from each page for city and sum them up
   sapply(
     X = get_pages(city),
     FUN = function(page) {
       Sys.sleep(time = delay)
-      get_prices(city = city, page = page, validate_page = FALSE)
+      get_prices(city = city, page = page, validate = FALSE)
     }
   ) %>%
     unlist() %>%
     sum(na.rm = TRUE)
+
 }
