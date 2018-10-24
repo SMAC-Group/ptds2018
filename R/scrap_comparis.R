@@ -62,6 +62,8 @@ get_pages <- function(city) {
 #'
 #' @param city a length one character vector indicating a city.
 #' @param page a length one numeric vector indicating a page number.
+#' @param validate_page a length one logical vector indicating whether or not to
+#' validate \code{page} argument.
 #'
 #' @return a numeric vector of prices.
 #'
@@ -71,7 +73,10 @@ get_pages <- function(city) {
 #' @author Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 #'
 #' @export
-get_prices <- function(city, page) {
+get_prices <- function(city, page, validate_page = TRUE) {
+
+  if (validate_page)
+    stopifnot(page %in% get_pages(city))
 
   url_path <- paste0(
     "https://en.comparis.ch/immobilien/result/list?requestobject={%22DealType%",
@@ -124,7 +129,8 @@ get_volume <- function(city) {
   sapply(
     X = get_pages(city),
     FUN = get_prices,
-    city = city
+    city = city,
+    validate_page = FALSE
   ) %>%
     unlist() %>%
     sum(na.rm = TRUE)
