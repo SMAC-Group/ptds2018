@@ -44,7 +44,7 @@ get_pages <- function(city) {
   xml2::read_html(url_path) %>%
     rvest::html_nodes("#resultlist_paging a") %>%
     rvest::html_text() %>%
-    as.numeric() %>%
+    {suppressWarnings(as.numeric(.))} %>%
     max(na.rm = TRUE) %>%
     magrittr::subtract(e2 = 1) %>%
     seq(from = 0)
@@ -103,7 +103,7 @@ get_prices <- function(city, page, validate_page = TRUE) {
     rvest::html_text() %>%
     substring(first = 5) %>%
     gsub(pattern = ",", replacement = "") %>%
-    as.numeric()
+    {suppressWarnings(as.numeric(.))}
 }
 
 #' Get a market volume for a given city
