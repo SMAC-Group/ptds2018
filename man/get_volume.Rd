@@ -4,10 +4,13 @@
 \alias{get_volume}
 \title{Get a market volume for a given city}
 \usage{
-get_volume(city)
+get_volume(city, delay = 1)
 }
 \arguments{
 \item{city}{a length one character vector indicating a city.}
+
+\item{delay}{a length one numeric vector indicating a delay between HTTP
+requests in seconds. Default value: \code{1}.}
 }
 \value{
 a sum of prices of all listings.

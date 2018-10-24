@@ -63,7 +63,7 @@ get_pages <- function(city) {
 #' @param city a length one character vector indicating a city.
 #' @param page a length one numeric vector indicating a page number.
 #' @param validate_page a length one logical vector indicating whether or not to
-#' validate \code{page} argument.
+#' validate \code{page} argument. Default value: \code{TRUE}.
 #'
 #' @return a numeric vector of prices.
 #'
@@ -115,6 +115,8 @@ get_prices <- function(city, page, validate_page = TRUE) {
 #' Note that only the latest (no older than one week) items considered.
 #'
 #' @param city a length one character vector indicating a city.
+#' @param delay a length one numeric vector indicating a delay between HTTP
+#' requests in seconds. Default value: \code{1}.
 #'
 #' @return a sum of prices of all listings.
 #'
@@ -124,13 +126,14 @@ get_prices <- function(city, page, validate_page = TRUE) {
 #' @author Iegor Rudnytskyi, \email{iegor.rudnytskyi@unil.ch}
 #'
 #' @export
-get_volume <- function(city) {
+get_volume <- function(city, delay = 1) {
 
   sapply(
     X = get_pages(city),
-    FUN = get_prices,
-    city = city,
-    validate_page = FALSE
+    FUN = function(page) {
+      Sys.sleep(time = delay)
+      get_prices(city = city, page = page, validate_page = FALSE)
+    }
   ) %>%
     unlist() %>%
     sum(na.rm = TRUE)

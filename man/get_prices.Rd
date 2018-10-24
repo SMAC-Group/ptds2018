@@ -12,7 +12,7 @@ get_prices(city, page, validate_page = TRUE)
 \item{page}{a length one numeric vector indicating a page number.}
 
 \item{validate_page}{a length one logical vector indicating whether or not to
-validate \code{page} argument.}
+validate \code{page} argument. Default value: \code{TRUE}.}
 }
 \value{
 a numeric vector of prices.
