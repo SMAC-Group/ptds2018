@@ -15,9 +15,14 @@ get_prices(city, page)
 a numeric vector of prices.
 }
 \description{
-\code{get_prices()} scraps prices elements for a given Swiss city and page
+\code{get_prices()} scrapes prices elements for a given Swiss city and page
 from \url{https://www.comparis.ch} web-page and returns a numeric vector of
 prices.
+}
+\details{
+Note that only the latest (no older than one week) items considered.
+\url{https://www.comparis.ch} url's indexing starts from zero, therefore, the
+page number should be subtracted by one.
 }
 \examples{
 prices <- get_prices("bern", 3)

@@ -13,9 +13,12 @@ get_volume(city)
 a sum of prices of all listings.
 }
 \description{
-\code{get_volume()} scraps a market volume for a given city, which is defined
-as a sum of prices of all listings published in the latest week on
+\code{get_volume()} scrapes a market volume for a given city, which is
+defined as a sum of prices of all listings published in the latest week on
 \url{https://www.comparis.ch}.
+}
+\details{
+Note that only the latest (no older than one week) items considered.
 }
 \examples{
 pages <- get_volume("bern")

@@ -7,15 +7,20 @@
 get_pages(city)
 }
 \arguments{
-\item{city}{a length one character vector indicating a city.}
+\item{city}{a length one character vector indicating a Swiss city.}
 }
 \value{
 a numeric vector of pages' numbers.
 }
 \description{
-\code{get_pages()} scraps pages' elements for a given Swiss city from
+\code{get_pages()} scrapes pages' elements for a given Swiss city from
 \url{https://www.comparis.ch} web-page and returns a vector with pages'
 numbers.
+}
+\details{
+Note that only the latest (no older than one week) items considered.
+\url{https://www.comparis.ch} url's indexing starts from zero, therefore, the
+returned sequence also starts from zero.
 }
 \examples{
 pages <- get_pages("bern")

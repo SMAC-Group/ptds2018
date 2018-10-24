@@ -1,10 +1,14 @@
 #' Get a vector of pages' numbers
 #'
-#' \code{get_pages()} scraps pages' elements for a given Swiss city from
+#' \code{get_pages()} scrapes pages' elements for a given Swiss city from
 #' \url{https://www.comparis.ch} web-page and returns a vector with pages'
 #' numbers.
 #'
-#' @param city a length one character vector indicating a city.
+#' Note that only the latest (no older than one week) items considered.
+#' \url{https://www.comparis.ch} url's indexing starts from zero, therefore, the
+#' returned sequence also starts from zero.
+#'
+#' @param city a length one character vector indicating a Swiss city.
 #'
 #' @return a numeric vector of pages' numbers.
 #'
@@ -48,9 +52,13 @@ get_pages <- function(city) {
 
 #' Get prices for a given city and page
 #'
-#' \code{get_prices()} scraps prices elements for a given Swiss city and page
+#' \code{get_prices()} scrapes prices elements for a given Swiss city and page
 #' from \url{https://www.comparis.ch} web-page and returns a numeric vector of
 #' prices.
+#'
+#' Note that only the latest (no older than one week) items considered.
+#' \url{https://www.comparis.ch} url's indexing starts from zero, therefore, the
+#' page number should be subtracted by one.
 #'
 #' @param city a length one character vector indicating a city.
 #' @param page a length one numeric vector indicating a page number.
@@ -95,9 +103,11 @@ get_prices <- function(city, page) {
 
 #' Get a market volume for a given city
 #'
-#' \code{get_volume()} scraps a market volume for a given city, which is defined
-#' as a sum of prices of all listings published in the latest week on
+#' \code{get_volume()} scrapes a market volume for a given city, which is
+#' defined as a sum of prices of all listings published in the latest week on
 #' \url{https://www.comparis.ch}.
+#'
+#' Note that only the latest (no older than one week) items considered.
 #'
 #' @param city a length one character vector indicating a city.
 #'
