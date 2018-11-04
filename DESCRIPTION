@@ -18,5 +18,6 @@ Imports:
   knitr,
   xml2,
   rvest,
-  magrittr
+  magrittr,
+  shiny
 RoxygenNote: 6.0.1
