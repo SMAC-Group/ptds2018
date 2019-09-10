@@ -1,0 +1,10 @@
+name: rmd_full
+title: rmd_full
+account: guerrier
+server: shinyapps.io
+appId: 206543
+bundleId: 949080
+url: https://guerrier.shinyapps.io/rmd_full/
+when: 1503365805.50586
+asMultiple: FALSE
+asStatic: FALSE
