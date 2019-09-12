@@ -1,4 +1,4 @@
-Package: ptds
+Package: ptdspkg
 Type: Package
 Title: Programming tools in data science (University of Lausanne)
 Version: 0.1.1
