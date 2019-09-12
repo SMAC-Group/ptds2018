@@ -1,4 +1,4 @@
-library(ptds)
+library(ptdspkg)
 library(miniUI)
 
 ui <- miniPage(
@@ -144,7 +144,7 @@ server <- function(input, output) {
 
   output$html <- renderUI({
     make_files(input, rmd = TRUE)
-    render("test.Rmd")
+    rmarkdown::render("test.Rmd")
     includeHTML("test.html")
   })
 }

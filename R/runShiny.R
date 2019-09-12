@@ -15,7 +15,7 @@
 #' @export
 runShiny = function(example){
   # locate all the shiny app examples that exist
-  validShiny = list.files(system.file("shiny-examples", package = "ptds"))
+  validShiny = list.files(system.file("shiny-examples", package = "ptdspkg"))
 
   # Prints out valid Shiny apps
   validShinyMsg =
@@ -34,7 +34,7 @@ runShiny = function(example){
   }
 
   # find and launch the app
-  appDir = system.file("shiny-examples", example, package = "ptds")
+  appDir = system.file("shiny-examples", example, package = "ptdspkg")
   shiny::runApp(appDir, display.mode = "normal")
 }
 

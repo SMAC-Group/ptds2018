@@ -164,7 +164,7 @@ make_files = function(input, rmd = FALSE){
   if(input$pic){
     cat("**Picture (with caption):**\n\n")
     #cat("![Science Department Banner](http://science.psu.edu/psu_eberly_blue.png)\n\n")
-    cat("![HEC Lausanne](http://www.unil.ch/logo/files/live/sites/logo/files/web/pdf/lo_unil_hec06_bleu.pdf)\n\n")
+    cat("![Logo of HEC Lausanne](https://github.com/SMAC-Group/ptds/raw/master/data/lo_unil_hec06_bleu.png)\n\n")
     cat("**Picture (without caption):**\n\n")
     cat("![](http://kefalosandassociates.com/wp-content/uploads/2015/07/facebook-banner.png)\n\n")
   }

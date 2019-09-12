@@ -1,9 +1,0 @@
----
-title: 'RMarkdown Playground'
-output:
-   html_document:
-      highlight: pygments
----
-
-Experiment with the Rmd Code below and test output.
-
