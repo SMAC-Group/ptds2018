@@ -4,8 +4,8 @@
 \alias{make_square}
 \title{Plotting a square}
 \usage{
-make_square(center = c(0, 0), side = 2, col = "darkblue", fill = NULL,
-  lty = 1)
+make_square(center = c(0, 0), side = 2, col = "darkblue",
+  fill = NULL, lty = 1)
 }
 \arguments{
 \item{center}{A \code{vector} of dimension 2 used to denote the center
